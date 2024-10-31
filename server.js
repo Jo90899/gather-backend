@@ -38,7 +38,7 @@ app.post('/components/create-event', (req, res) => {
   res.json({ eventId });
 });
 
-app.post('/components/join-event/:eventId', (req, res) => {
+app.post('/join-event/:eventId', (req, res) => {
   console.log('Received join/update event request:', req.params, req.body);
   const { eventId } = req.params;
   const { name, email, address, hasCar, canGiveRides, maxPassengers } = req.body;
