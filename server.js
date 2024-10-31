@@ -79,7 +79,7 @@ app.get('/join-event/:eventId', (req, res) => {
   }
 
   // Serve the join event page (if using React or another frontend framework)
-  res.sendFile(path.join(__dirname, '../../public/index.html')); // Adjust this path based on where your frontend build is located.
+  res.sendFile(path.join(__dirname, '../../build/index.html')); // Adjust this path based on where your frontend build is located.
 });
 
 app.get('/event/:eventId', (req, res) => {
