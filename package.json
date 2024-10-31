@@ -1,6 +1,6 @@
 {
   "name": "hangout",
-  "homepage": "https://jo90899.github.io",
+  "homepage": "http://5.78.125.190/",
   "proxy": "http://localhost:3000",
   "version": "0.1.0",
   "private": true,
