@@ -38,7 +38,7 @@ app.post('/components/create-event', (req, res) => {
   res.json({ eventId });
 });
 
-app.post('/join-event/:eventId', (req, res) => {
+app.post('/components/join-event/:eventId', (req, res) => {
   console.log('Received join/update event request:', req.params, req.body);
   const { eventId } = req.params;
   const { name, email, address, hasCar, canGiveRides, maxPassengers } = req.body;
@@ -70,17 +70,17 @@ app.post('/join-event/:eventId', (req, res) => {
   res.json({ success: true, updated: false });
 });
 
-app.get('/join-event/:eventId', (req, res) => {
-  const { eventId } = req.params;
+// app.get('/join-event/:eventId', (req, res) => {
+//   const { eventId } = req.params;
 
-  // Check if the event exists
-  if (!events[eventId]) {
-      return res.status(404).send('Event not found');
-  }
+//   // Check if the event exists
+//   if (!events[eventId]) {
+//       return res.status(404).send('Event not found');
+//   }
 
-  // Serve the join event page (if using React or another frontend framework)
-  res.sendFile(path.join(__dirname, 'path-to-your-frontend-build/index.html')); // Adjust this path based on where your frontend build is located.
-});
+//   // Serve the join event page (if using React or another frontend framework)
+//   res.sendFile(path.join(__dirname, 'path-to-your-frontend-build/index.html')); // Adjust this path based on where your frontend build is located.
+// });
 
 app.get('/event/:eventId', (req, res) => {
   const { eventId } = req.params;
