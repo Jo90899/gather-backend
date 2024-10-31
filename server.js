@@ -7,7 +7,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGIN || 'http://localhost:3000'
+  origin: ['http://localhost:3000', 'http://5.78.125.190'],
+  credentials: true
 }));
 
 // Logging middleware
