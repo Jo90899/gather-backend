@@ -26,13 +26,13 @@ app.get('/health', (req, res) => {
 
 app.post('/components/create-event', (req, res) => {
   console.log('Received create event request:', req.body);
-  const { eventTitle, eventAddress, eventDescription, mainUserName, mainUserEmail, mainUserAddress } = req.body;
+  const { eventTitle, eventAddress, eventDescription, mainUserName, mainUserPhone, mainUserAddress } = req.body;
   const eventId = uuid.v4();
   events[eventId] = {
     eventTitle,
     eventAddress,
     eventDescription,
-    creator: { name: mainUserName, email: mainUserEmail, address: mainUserAddress },
+    creator: { name: mainUserName, phone: mainUserPhone, address: mainUserAddress },
     participants: []
   };
   res.json({ eventId });
@@ -41,32 +41,32 @@ app.post('/components/create-event', (req, res) => {
 app.post('/join-event/:eventId', (req, res) => {
   console.log('Received join/update event request:', req.params, req.body);
   const { eventId } = req.params;
-  const { name, email, address, hasCar, canGiveRides, maxPassengers } = req.body;
+  const { name, phone, address, hasCar, canGiveRides, maxPassengers } = req.body;
 
   if (!events[eventId]) {
     console.log('Event not found:', eventId);
     return res.status(404).json({ error: 'Event not found' });
   }
 
-  const existingParticipantIndex = events[eventId].participants.findIndex(p => p.email === email);
+  const existingParticipantIndex = events[eventId].participants.findIndex(p => p.phone === phone);
 
   if (existingParticipantIndex !== -1) {
     // Update existing participant information
     events[eventId].participants[existingParticipantIndex] = {
       name,
-      email,
+      phone,
       address,
       hasCar,
       canGiveRides,
       maxPassengers
     };
-    console.log('Participant information updated:', email);
+    console.log('Participant information updated:', phone);
     return res.json({ success: true, updated: true });
   }
 
   // Add new participant
-  events[eventId].participants.push({ name, email, address, hasCar, canGiveRides, maxPassengers });
-  console.log('New participant added:', email);
+  events[eventId].participants.push({ name, phone, address, hasCar, canGiveRides, maxPassengers });
+  console.log('New participant added:', phone);
   res.json({ success: true, updated: false });
 });
 
