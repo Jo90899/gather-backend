@@ -82,14 +82,14 @@ app.get('/my-event/:eventId', (req, res) => {
   res.sendFile(path.join(__dirname, '../../build/index.html')); // Adjust this path based on where your frontend build is located.
 });
 
-app.get('/event/:eventId', (req, res) => {
-  const { eventId } = req.params;
-  if (events[eventId]) {
-    res.json(events[eventId]);
-  } else {
-    res.status(404).json({ error: 'Event not found' });
-  }
-});
+// app.get('/event/:eventId', (req, res) => {
+//   const { eventId } = req.params;
+//   if (events[eventId]) {
+//     res.json(events[eventId]);
+//   } else {
+//     res.status(404).json({ error: 'Event not found' });
+//   }
+// });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
