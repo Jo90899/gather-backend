@@ -38,7 +38,7 @@ app.post('/components/create-event', (req, res) => {
   res.json({ eventId });
 });
 
-app.post('/join-event/:eventId', (req, res) => {
+app.post('/my-event/:eventId', (req, res) => {
   console.log('Received join/update event request:', req.params, req.body);
   const { eventId } = req.params;
   const { name, phone, address, hasCar, canGiveRides, maxPassengers } = req.body;
@@ -70,7 +70,7 @@ app.post('/join-event/:eventId', (req, res) => {
   res.json({ success: true, updated: false });
 });
 
-app.get('/join-event/:eventId', (req, res) => {
+app.get('/my-event/:eventId', (req, res) => {
   const { eventId } = req.params;
 
   // Check if the event exists
