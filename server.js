@@ -60,7 +60,7 @@ app.post('/my-event/:eventId', (req, res) => {
       canGiveRides,
       maxPassengers
     };
-    console.log('Participant information updated:', phone);
+    log('Participant information updated:', phone);
     return res.json({ success: true, updated: true });
   }
 
