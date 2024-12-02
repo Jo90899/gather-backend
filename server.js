@@ -60,7 +60,7 @@ app.post('/my-event/:eventId', (req, res) => {
       canGiveRides,
       maxPassengers
     };
-    log('Participant information updated:', phone);
+    console.log('Participant information updated:', phone);
     return res.json({ success: true, updated: true });
   }
 
@@ -99,17 +99,3 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
-
-let serverLogs = [];
-
-// Replace console.log with a custom logging function
-function log(message) {
-  const timestamp = new Date().toISOString();
-  const logEntry = `${timestamp}: ${message}`;
-  serverLogs.push(logEntry);
-  console.log(logEntry); // Still log to the server console
-}
-
-app.get('/logs', (req, res) => {
-  res.json(serverLogs);
-});
