@@ -26,51 +26,51 @@ app.get('/health', (req, res) => {
 
 app.post('/components/create-event', (req, res) => {
   console.log('Received create event request:', req.body);
-  const { eventTitle, eventAddress, eventDescription, mainUserName, mainUserPhone, mainUserAddress } = req.body;
+  const { eventTitle, eventAddress, eventDescription, mainUserName, mainUserEmail, mainUserAddress } = req.body;
   const eventId = uuid.v4();
   events[eventId] = {
     eventTitle,
     eventAddress,
     eventDescription,
-    creator: { name: mainUserName, phone: mainUserPhone, address: mainUserAddress },
+    creator: { name: mainUserName, email: mainUserEmail, address: mainUserAddress },
     participants: []
   };
   res.json({ eventId });
 });
 
-app.post('/my-event/:eventId', (req, res) => {
+app.post('/join-event/:eventId', (req, res) => {
   console.log('Received join/update event request:', req.params, req.body);
   const { eventId } = req.params;
-  const { name, phone, address, hasCar, canGiveRides, maxPassengers } = req.body;
+  const { name, email, address, hasCar, canGiveRides, maxPassengers } = req.body;
 
   if (!events[eventId]) {
     console.log('Event not found:', eventId);
     return res.status(404).json({ error: 'Event not found' });
   }
 
-  const existingParticipantIndex = events[eventId].participants.findIndex(p => p.phone === phone);
+  const existingParticipantIndex = events[eventId].participants.findIndex(p => p.email === email);
 
   if (existingParticipantIndex !== -1) {
     // Update existing participant information
     events[eventId].participants[existingParticipantIndex] = {
       name,
-      phone,
+      email,
       address,
       hasCar,
       canGiveRides,
       maxPassengers
     };
-    console.log('Participant information updated:', phone);
+    console.log('Participant information updated:', email);
     return res.json({ success: true, updated: true });
   }
 
   // Add new participant
-  events[eventId].participants.push({ name, phone, address, hasCar, canGiveRides, maxPassengers });
-  console.log('New participant added:', phone);
+  events[eventId].participants.push({ name, email, address, hasCar, canGiveRides, maxPassengers });
+  console.log('New participant added:', email);
   res.json({ success: true, updated: false });
 });
 
-app.get('/my-event/:eventId', (req, res) => {
+app.get('/join-event/:eventId', (req, res) => {
   const { eventId } = req.params;
 
   // Check if the event exists
