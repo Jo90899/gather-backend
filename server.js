@@ -42,6 +42,7 @@ app.post('/join-event/:eventId', (req, res) => {
   console.log('Received join/update event request:', req.params, req.body);
   const { eventId } = req.params;
   const { name, phone, address, hasCar, canGiveRides, maxPassengers } = req.body;
+  console.log(phone)
 
   if (!events[eventId]) {
     console.log('Event not found:', eventId);
