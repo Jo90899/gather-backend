@@ -41,7 +41,7 @@ app.post('/components/create-event', (req, res) => {
 app.post('/join-event/:eventId', (req, res) => {
   console.log('Received join/update event request:', req.params, req.body);
   const { eventId } = req.params;
-  const { name, email, phone, address, hasCar, canGiveRides, maxPassengers } = req.body;
+  const { name, email, description, address, hasCar, canGiveRides, maxPassengers } = req.body;
 
   if (!events[eventId]) {
     console.log('Event not found:', eventId);
@@ -55,7 +55,7 @@ app.post('/join-event/:eventId', (req, res) => {
     events[eventId].participants[existingParticipantIndex] = {
       name,
       email,
-      phone,
+      description,
       address,
       hasCar,
       canGiveRides,
@@ -66,7 +66,7 @@ app.post('/join-event/:eventId', (req, res) => {
   }
 
   // Add new participant
-  events[eventId].participants.push({ name, email, phone, address, hasCar, canGiveRides, maxPassengers });
+  events[eventId].participants.push({ name, email, description, address, hasCar, canGiveRides, maxPassengers });
   console.log('New participant added:', email);
   res.json({ success: true, updated: false });
 });
