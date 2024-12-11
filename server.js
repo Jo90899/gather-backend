@@ -26,7 +26,7 @@ app.get('/health', (req, res) => {
 
 app.post('/components/create-event', (req, res) => {
   console.log('Received create event request:', req.body);
-  const { eventTitle, eventAddress, eventDescription, mainUserName, mainUserEmail, mainUserAddress } = req.body;
+  const { eventTitle, eventAddress, eventDescription, mainUserName, mainUserEmail, mainUserPhone, mainUserAddress } = req.body;
   const eventId = uuid.v4();
   events[eventId] = {
     eventTitle,
