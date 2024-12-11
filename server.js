@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://5.78.125.190'],
+  origin: ['http://localhost:3000', 'http://5.78.125.190', 'https://gather-maps.com'],
   credentials: true
 }));
 
