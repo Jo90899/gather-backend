@@ -3,6 +3,14 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const uuid = require('uuid');
 
+const https = require("https"),
+  fs = require("fs");
+
+const options = {
+  key: fs.readFileSync("/etc/ssl/private/ssl-cert-snakeoil.key"),
+  cert: fs.readFileSync("/etc/ssl/certs/ssl-cert-snakeoil.pem")
+};
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -100,3 +108,5 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+https.createServer(options, app).listen(5050);
