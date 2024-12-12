@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://5.78.125.190', 'https://gather-maps.com'],
+  origin: ['http://localhost:3000', 'https://gather-maps.com'],
   credentials: true
 }));
 
@@ -98,5 +98,5 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 443;
 app.listen(port, () => console.log(`Server running on port ${port}`));
